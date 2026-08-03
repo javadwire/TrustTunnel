@@ -4,8 +4,16 @@ ARG ENDPOINT_DIR_NAME="TrustTunnel"
 ARG RUST_DEFAULT_VERSION="1.85"
 WORKDIR /home
 # Install needed packets
-RUN apt update && \
-    apt install -y build-essential cmake curl make git libclang-dev
+RUN apt-get update --fix-missing && \
+    apt-get install -y --no-install-recommends \
+    build-essential \
+    cmake \
+    curl \
+    make \
+    git \
+    libclang-dev && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 # Install Rust and Cargo
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain $RUST_DEFAULT_VERSION -y
 ENV PATH="/root/.cargo/bin:$PATH"
