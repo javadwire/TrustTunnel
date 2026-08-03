@@ -37,6 +37,6 @@ WORKDIR /trusttunnel_endpoint
 # - credentials.toml
 # - rules.toml
 # - certs/
-VOLUME /trusttunnel_endpoint/
+# VOLUME ["/opt/trusttunnel"]
 ENTRYPOINT ["/scripts/docker-entrypoint.sh"]
 
